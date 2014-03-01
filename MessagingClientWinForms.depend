@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1393271387 source:d:\temp\ÏÑÏ\chat\messagingclientwinforms\main.cpp
+	<stdio.h>
+	<tchar.h>
+	<string.h>
+	<winsock2.h>
+	<windows.h>
+
