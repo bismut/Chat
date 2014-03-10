@@ -1,8 +1,23 @@
 #include "Communicator.hpp"
 
+// Констуктор.
 Communicator::Communicator()
 {
+    _bufferRecieve = new byte[SIZE_OF_BUFFER];
+    _bufferSend    = new byte[SIZE_OF_BUFFER];
 
+    ZeroMemory(_bufferRecieve, sizeof(_bufferRecieve));
+    ZeroMemory(_bufferSend,    sizeof(_bufferSend));
+
+    #define IP_ADDRESS "127.0.0.1"
+    _serverAddress = new char[sizeof(IP_ADDRESS)];
+    strcpy(_serverAddress, IP_ADDRESS);
+
+    _port = 1348;
+
+    _socket = INVALID_SOCKET;
+
+    _eventManualConnect = CreateEvent(NULL, TRUE, FALSE, NULL);
 }
 
 Communicator::~Communicator()
@@ -21,41 +36,28 @@ Communicator* Communicator::Instance()
     return _instance;
 }
 
+// Инициализирует необходимые структуры для работы.
 bool Communicator::StartCommunicator()
 {
-    _bufferRecieve = new byte[SIZE_OF_BUFFER];
-    _bufferSend    = new byte[SIZE_OF_BUFFER];
-
-    ZeroMemory(_bufferRecieve, sizeof(_bufferRecieve));
-    ZeroMemory(_bufferSend,    sizeof(_bufferSend));
-
-    #define IP_ADDRESS "127.0.0.1"
-    _serverAddress = new char[sizeof(IP_ADDRESS)];
-    strcpy(_serverAddress, IP_ADDRESS);
-
-    _port = 1348;
-
-    _socketReceive = INVALID_SOCKET;
-    _socketSend    = INVALID_SOCKET;
-
-    _eventManualConnect = CreateEvent(NULL, TRUE, FALSE, NULL);
-
     WSAData wsaData;
     if(WSAStartup(0x202, &wsaData))
     {
-        MessageBox(NULL, "Error WSAStartup.", "Error", MB_OK|MB_ICONINFORMATION);
+        MessageBox(NULL, "Error in WSAStartup.", "Error", MB_OK|MB_ICONINFORMATION);
         return false;
     }
 
-    _threadRecieve = CreateThread(NULL, 0, threadRecieve, NULL, 0, NULL);
-    _threadSend =    CreateThread(NULL, 0, threadSend,    NULL, 0, NULL);
+    _threadWorkWithServer = CreateThread(NULL, 0, threadWorkWithServer, NULL, 0, NULL);
 
-    if(_threadRecieve == INVALID_HANDLE_VALUE || _threadSend == INVALID_HANDLE_VALUE)
+    if(_threadWorkWithServer == INVALID_HANDLE_VALUE)
+    {
+        WSACleanup();
         return false;
+    }
 
     return true;
 }
 
+// Подключается к серверу.
 bool Communicator::Connect()
 {
 
@@ -65,10 +67,12 @@ bool Communicator::Connect()
     return true;
 }
 
+// Отключается от сервера.
 bool Communicator::Disconnect()
 {
 
 }
+
 
 bool Communicator::StopCommunicator()
 {
@@ -83,6 +87,16 @@ bool Communicator::StopCommunicator()
     delete _bufferSend;
 
     CloseHandle(_eventManualConnect);
+}
+
+DWORD WINAPI Communicator::threadWorkWithServer(LPVOID lParam)
+{
+    while(true)
+    {
+        send(_socket, _buffer, , NULL);
+    }
+
+    return 0;
 }
 
 DWORD WINAPI Communicator::threadRecieve(LPVOID lParam)

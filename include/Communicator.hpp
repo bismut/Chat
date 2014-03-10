@@ -8,10 +8,12 @@
 #define DISCONNECT_FROM_SERVER 2
 #define STOP_TRANSMISSION 3
 
+// Класс коммуникатор. (Паттерн "одиночка")
 class Communicator
 {
     public:
         virtual ~Communicator();
+
         static Communicator* Instance();
         bool StartCommunicator();
         bool Connect();
@@ -19,34 +21,29 @@ class Communicator
         bool StopCommunicator();
 
     protected:
-        Communicator();
+        Communicator(); // защищенный констуктор
 
     private:
         static Communicator* _instance;
 
+        byte* _buffer;
         byte* _bufferRecieve;
         byte* _bufferSend;
 
         char* _serverAddress;
         int _port;
 
-        SOCKET _socketReceive;
-        SOCKET _socketSend;
+        SOCKET _socket;
 
-        sockaddr_in _sockaddrReceive;
-        sockaddr_in _sockaddrSend;
+        sockaddr_in _sockaddr;
 
-        HANDLE _threadMain;
-        HANDLE _threadRecieve;
-        HANDLE _threadSend;
+        HANDLE _threadWorkWithServer;
 
         /**< Событие "Подключиться к серверу" */
         HANDLE _eventManualConnect;
         HANDLE _eventManualExit;
 
-        DWORD WINAPI threadMain(LPVOID lParam);
-        DWORD WINAPI threadRecieve(LPVOID lParam);
-        DWORD WINAPI threadSend(LPVOID lParam);
+        DWORD WINAPI threadWorkWithServer(LPVOID lParam);
 
 
 };
