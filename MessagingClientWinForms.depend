@@ -1,8 +1,15 @@
 # depslib dependency file v1.0
-1393271387 source:d:\temp\ÏÑÏ\chat\messagingclientwinforms\main.cpp
+1393773093 source:d:\temp\ÏÑÏ\chat\messagingclientwinforms\main.cpp
 	<stdio.h>
 	<tchar.h>
 	<string.h>
+	<winsock2.h>
+	<windows.h>
+
+1393772245 source:d:\temp\ÏÑÏ\chat\messagingclientwinforms\src\communicator.cpp
+	"Communicator.h"
+
+1393772125 d:\temp\ÏÑÏ\chat\messagingclientwinforms\include\communicator.h
 	<winsock2.h>
 	<windows.h>
 
