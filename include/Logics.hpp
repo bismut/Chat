@@ -1,6 +1,7 @@
 #ifndef LOGICS_H
 #define LOGICS_H
 
+#include <windows.h>
 
 class Logics
 {
@@ -10,8 +11,9 @@ class Logics
 
     protected:
 
-
     private:
+        HANDLE hThreadTick;
+        DWORD WINAPI Tick(LPVOID lParam);
 
 };
 

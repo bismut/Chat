@@ -8,8 +8,12 @@
 #endif
 
 // LIBRARIES
+#include <tchar.h>
 #include <winsock2.h>
 #include <windows.h>
+
+#include <Communicator.hpp>
+
 
 // CONTROLS:
 #define ID_TEXTBOX_RECIEVE 1

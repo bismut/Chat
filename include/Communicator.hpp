@@ -1,50 +1,33 @@
 #ifndef COMMUNICATOR_HPP
 #define COMMUNICATOR_HPP
 
-#include "main.hpp"
+#include <winsock2.h>
 
-#define SIZE_OF_BUFFER 1024
-#define CONNECT_TO_SERVER 1
-#define DISCONNECT_FROM_SERVER 2
-#define STOP_TRANSMISSION 3
-
-// Класс коммуникатор. (Паттерн "одиночка")
+// Класс коммуникатор.
 class Communicator
 {
     public:
+        Communicator(char* serverAddress, int port);
         virtual ~Communicator();
 
-        static Communicator* Instance();
         bool StartCommunicator();
         bool Connect();
+        bool SendBytes(char* bytes, int length);
+        bool ReceiveBytes(char* bytes);
         bool Disconnect();
         bool StopCommunicator();
 
+        void SetNewServerAddress(char* newServerAddress);
+        void SetNewPort(int newPort);
+
     protected:
-        Communicator(); // защищенный констуктор
 
     private:
-        static Communicator* _instance;
-
-        byte* _buffer;
-        byte* _bufferRecieve;
-        byte* _bufferSend;
-
         char* _serverAddress;
         int _port;
 
         SOCKET _socket;
-
         sockaddr_in _sockaddr;
-
-        HANDLE _threadWorkWithServer;
-
-        /**< Событие "Подключиться к серверу" */
-        HANDLE _eventManualConnect;
-        HANDLE _eventManualExit;
-
-        DWORD WINAPI threadWorkWithServer(LPVOID lParam);
-
 
 };
 

@@ -2,7 +2,7 @@
 
 Logics::Logics()
 {
-    //ctor
+
 }
 
 Logics::~Logics()

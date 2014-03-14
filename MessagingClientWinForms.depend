@@ -6,10 +6,40 @@
 	<winsock2.h>
 	<windows.h>
 
-1393772245 source:d:\temp\œ—œ\chat\messagingclientwinforms\src\communicator.cpp
-	"Communicator.h"
+1394825908 source:d:\temp\œ—œ\chat\messagingclientwinforms\src\communicator.cpp
+	"Communicator.hpp"
 
 1393772125 d:\temp\œ—œ\chat\messagingclientwinforms\include\communicator.h
 	<winsock2.h>
 	<windows.h>
+
+1394814462 source:d:\temp\œ—œ\chat\messagingclientwinforms\src\incomingmessages.cpp
+
+1394627224 source:d:\temp\œ—œ\chat\messagingclientwinforms\src\interface.cpp
+	"Interface.hpp"
+
+1394627224 d:\temp\œ—œ\chat\messagingclientwinforms\include\interface.hpp
+
+1394821579 source:d:\temp\œ—œ\chat\messagingclientwinforms\src\logics.cpp
+	"Logics.hpp"
+
+1394821579 d:\temp\œ—œ\chat\messagingclientwinforms\include\logics.hpp
+	<windows.h>
+
+1394826034 source:d:\temp\œ—œ\chat\messagingclientwinforms\src\main.cpp
+	"main.hpp"
+
+1394823849 d:\temp\œ—œ\chat\messagingclientwinforms\include\main.hpp
+	<tchar.h>
+	<winsock2.h>
+	<windows.h>
+	<Communicator.hpp>
+
+1394815216 source:d:\temp\œ—œ\chat\messagingclientwinforms\src\client.cpp
+	"Client.hpp"
+
+1394815327 d:\temp\œ—œ\chat\messagingclientwinforms\include\client.hpp
+
+1394826949 d:\temp\œ—œ\chat\messagingclientwinforms\include\communicator.hpp
+	<winsock2.h>
 
