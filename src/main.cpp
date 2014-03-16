@@ -4,7 +4,44 @@ HWND hwndMain;
 HWND textBoxReceive;
 HWND textBoxSend;
 
-Communicator* cServer;
+Logics* logics;
+#define SIZE_OF_TEMP_BUFFER 1024
+char* tempBuffer;
+
+void ProcessInputMessages(MessageType messageType)
+{
+    switch(messageType)
+    {
+        case MESSAGE_EMPTY:
+            break;
+        case MESSAGE_CONNECT:
+            {
+                SendMessage(textBoxReceive,EM_SETSEL,-1,-1);
+                SendMessage(textBoxReceive,EM_REPLACESEL,TRUE,(LPARAM)"\r\nYou have been connected!");
+                SendMessage(textBoxReceive,EM_REPLACESEL,TRUE,(LPARAM)buff);
+                break;
+            }
+        case MESSAGE_DISCONNECT:
+            {
+                SendMessage(textBoxReceive,EM_SETSEL,-1,-1);
+                SendMessage(textBoxReceive,EM_REPLACESEL,TRUE,(LPARAM)"\r\nYou have been disconnected!");
+                SendMessage(textBoxReceive,EM_REPLACESEL,TRUE,(LPARAM)buff);
+                break;
+            }
+        case MESSAGE_LETTER:
+            {
+                char temp[SIZE_OF_TEMP_BUFFER];
+                logics->GetInBuffer(temp);
+                char temp2[SIZE_OF_TEMP_BUFFER] = "\r\n";
+                SendMessage(textBoxReceive,EM_SETSEL,-1,-1);
+                SendMessage(textBoxReceive,EM_REPLACESEL,TRUE,(LPARAM)strcat(temp2, temp));
+                SendMessage(textBoxReceive,EM_REPLACESEL,TRUE,(LPARAM)buff);
+                break;
+            }
+    }
+
+}
+
 
 /*  Declare Windows procedure  */
 LRESULT CALLBACK WindowProcedure (HWND, UINT, WPARAM, LPARAM);
@@ -60,9 +97,12 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 
     //del
     hwndMain = hwnd;
-    cServer = new Communicator("127.0.0.1",1339);
-    if(!cServer->StartCommunicator())
-         MessageBox(NULL, "Error of start communicator.", "Error", MB_OK|MB_ICONINFORMATION);
+    logics = new Logics("client1");
+    tempBuffer = new char[SIZE_OF_TEMP_BUFFER];
+//    HANDLE _hThreadProcessInputMessages = CreateThread(NULL, 0, , NULL, 0, NULL);
+//    cServer = new Communicator("127.0.0.1",1339);
+//    if(!cServer->StartCommunicator())
+//         MessageBox(NULL, "Error of start communicator.", "Error", MB_OK|MB_ICONINFORMATION);
 
     /* Make the window visible on the screen */
     ShowWindow (hwnd, nCmdShow);
@@ -77,9 +117,11 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
     }
 
     //del
-    if(!cServer->StopCommunicator())
-         MessageBox(NULL, "Error of stop communicator.", "Error", MB_OK|MB_ICONINFORMATION);
-    delete cServer;
+    delete tempBuffer;
+    delete logics;
+//    if(!cServer->StopCommunicator())
+//         MessageBox(NULL, "Error of stop communicator.", "Error", MB_OK|MB_ICONINFORMATION);
+//    delete cServer;
 
     /* The program return-value is 0 - The value that PostQuitMessage() gave */
     return messages.wParam;
@@ -105,20 +147,26 @@ LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM
             {
                 if(LOWORD(wParam) == ID_BUTTON_SEND)
                 {
-                    char mymessage[] = "Hello from CLIENT!";
-                    if(!cServer->SendBytes(mymessage, sizeof(mymessage)))
-                        MessageBox(NULL, "Error of sending.", "Error", MB_OK|MB_ICONINFORMATION);
+
+                    GetDlgItemText(hwnd, ID_TEXTBOX_SEND, tempBuffer, SIZE_OF_TEMP_BUFFER);
+                    logics->SetOutBuffer(tempBuffer);
+                    logics->SetOutMessage(MESSAGE_LETTER);
+//                    char mymessage[] = "Hello from CLIENT!";
+//                    if(!cServer->SendBytes(mymessage, sizeof(mymessage)))
+//                        MessageBox(NULL, "Error of sending.", "Error", MB_OK|MB_ICONINFORMATION);
                 }
                 else if(LOWORD(wParam) == ID_BUTTON_ENTER_CHAT)
                 {
-                    if(!cServer->Connect())
-                        MessageBox(NULL, "Error of connect.", "Error", MB_OK|MB_ICONINFORMATION);
+                    logics->SetOutMessage(MESSAGE_CONNECT);
+//                    if(!cServer->Connect())
+//                        MessageBox(NULL, "Error of connect.", "Error", MB_OK|MB_ICONINFORMATION);
 
                 }
                 else if(LOWORD(wParam) == ID_BUTTON_QUIT_CHAT)
                 {
-                    if(!cServer->Disconnect())
-                         MessageBox(NULL, "Error of disconnect.", "Error", MB_OK|MB_ICONINFORMATION);
+                    logics->SetOutMessage(MESSAGE_DISCONNECT);
+//                    if(!cServer->Disconnect())
+//                         MessageBox(NULL, "Error of disconnect.", "Error", MB_OK|MB_ICONINFORMATION);
                 }
                 break;
             }

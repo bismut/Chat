@@ -65,6 +65,12 @@ bool Communicator::Connect()
     return true;
 }
 
+bool Communicator::IsConnected()
+{
+    if (_socket != INVALID_SOCKET) return true;
+    else return false;
+}
+
 bool Communicator::SendBytes(char* bytes, int length)
 {
     send(_socket, (char*) &length, sizeof(length), 0);

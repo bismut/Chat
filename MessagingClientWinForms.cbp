@@ -39,15 +39,23 @@
 			<Add library="kernel32" />
 			<Add library="comctl32" />
 		</Linker>
+		<Unit filename="include/Client.hpp" />
 		<Unit filename="include/Communicator.hpp" />
 		<Unit filename="include/IncomingMessages.hpp" />
 		<Unit filename="include/Interface.hpp" />
 		<Unit filename="include/Logics.hpp" />
+		<Unit filename="include/MessageType.hpp" />
+		<Unit filename="include/Messager.hpp" />
+		<Unit filename="include/NetworkMessage.hpp" />
 		<Unit filename="include/main.hpp" />
+		<Unit filename="src/Client.cpp" />
 		<Unit filename="src/Communicator.cpp" />
 		<Unit filename="src/IncomingMessages.cpp" />
 		<Unit filename="src/Interface.cpp" />
 		<Unit filename="src/Logics.cpp" />
+		<Unit filename="src/MessageType.cpp" />
+		<Unit filename="src/Messager.cpp" />
+		<Unit filename="src/NetworkMessage.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />

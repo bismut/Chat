@@ -3,8 +3,10 @@
 
 enum MessageType : char
 {
-    EMPTY,
-    LETTER
+    MESSAGE_EMPTY,
+    MESSAGE_CONNECT,
+    MESSAGE_DISCONNECT,
+    MESSAGE_LETTER
 };
 
 

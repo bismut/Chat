@@ -12,6 +12,7 @@ class Communicator
 
         bool StartCommunicator();
         bool Connect();
+        bool IsConnected();
         bool SendBytes(char* bytes, int length);
         bool ReceiveBytes(char* bytes);
         bool Disconnect();
