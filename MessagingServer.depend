@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1394824760 source:d:\temp\ÏÑÏ\chat\messagingserver\src\communicator.cpp
+	"Communicator.hpp"
+
+1394824001 d:\temp\ÏÑÏ\chat\messagingserver\include\communicator.hpp
+	<winsock2.h>
+
+1394824308 source:d:\temp\ÏÑÏ\chat\messagingserver\main.cpp
+	<stdio.h>
+	<winsock2.h>
+	<windows.h>
+	"Communicator.hpp"
+
