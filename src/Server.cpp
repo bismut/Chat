@@ -1,20 +1,31 @@
 #include "Server.hpp"
 
-Server::Server(int maxCountClients, int maxCountConnections, int port)
+
+
+Server::Server(int port, Logics* logics)
 {
-    _maxCountClients = maxCountClients;
-    _maxCountConnections = maxCountConnections;
+    _logics = logics;
+
     _port = port;
 
     _socketServer = INVALID_SOCKET;
 
     _hThreadAcceptConnections = INVALID_HANDLE_VALUE;
+    _hAutoEventStopAccepting  = INVALID_HANDLE_VALUE;
 }
+
+
 
 Server::~Server()
 {
 
 }
+
+
+
+int Server::_maxCountConnections = 8;
+
+
 
 bool Server::InitializeWinsock2DLL()
 {
@@ -26,6 +37,8 @@ bool Server::InitializeWinsock2DLL()
     }
     return true;
 }
+
+
 
 bool Server::Listen()
 {
@@ -57,41 +70,101 @@ bool Server::Listen()
         return false;
     }
 
+    // pre-create event:
+    _hAutoEventStopAccepting  = CreateEvent(NULL, FALSE, FALSE, NULL);
+    if(_hAutoEventStopAccepting == INVALID_HANDLE_VALUE)
+    {
+        printf("Error in function \"CreateEvent\".\n");
+        closesocket(_socketServer);
+        _socketServer = INVALID_SOCKET;
+        return false;
+    }
+
+    // run thread for accepting connections:
+    _hThreadAcceptConnections = CreateThread(NULL, 0, threadAcceptConnections, NULL, 0, NULL);
+    if(_hThreadAcceptConnections == INVALID_HANDLE_VALUE)
+    {
+        printf("Error in function \"CrateThread\".\n");
+        closesocket(_socketServer);
+        _socketServer = INVALID_SOCKET;
+        return false;
+    }
+
     return true;
 }
 
-DWORD WINAPI Server::ThreadAcceptConnections(LPVOID lParam)
+
+
+DWORD WINAPI Server::threadAcceptConnections(LPVOID lParam)
 {
     while(true)
     {
+        if(WaitForSingleObject(_hAutoEventStopAccepting, 0) == WAIT_OBJECT_0)
+            break;
+
         sockaddr_in clientAddr;
         int clientAddrSize = sizeof(clientAddr);
-        SOCKET clientSocket = accept(mysocket, (sockaddr *) &clientAddr, &clientAddrSize);
+        SOCKET clientSocket = accept(_socketServer, (sockaddr *) &clientAddr, &clientAddrSize);
+
+        if(clientSocket != INVALID_SOCKET)
+        {
+            Communicator* communicator = new Communicator(clientSocket);
+            _logics.AddCommunicatorFromServer(communicator);
+        }
     }
     return 0;
 }
 
+
+
 bool Server::StopListen()
 {
     // stop accepting of clients
+    SetEvent(_hAutoEventStopAccepting);
 
     if(closesocket(_socketServer) == SOCKET_ERROR)
     {
-        _socket = INVALID_SOCKET;
+        _socketServer = INVALID_SOCKET;
         return false;
     }
-    _socket = INVALID_SOCKET;
-    return true;
+    _socketServer = INVALID_SOCKET;
+
+    int resultOfWait = WaitForSingleObject(_hThreadAcceptConnections, 3000);
+
+    if(resultOfWait == WAIT_TIMEOUT) {
+        return false;
+    }
+    else {
+        CloseHandle(_hThreadAcceptConnections);
+        _hThreadAcceptConnections = INVALID_HANDLE_VALUE;
+
+        CloseHandle(_hAutoEventStopAccepting);
+        _hAutoEventStopAccepting = INVALID_HANDLE_VALUE;
+
+        return true;
+    }
 }
+
+
 
 bool Server::TerminateWinsock2DLL()
 {
-    StopListen();
     if(WSACleanup() == SOCKET_ERROR) return false;
     return true;
 }
 
-void Server::SetNewPort(int port)
+
+
+int Server::GetPort()
+{
+    return _port;
+}
+
+
+
+void Server::SetPort(int port)
 {
     _port = port;
 }
+
+

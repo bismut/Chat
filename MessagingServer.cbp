@@ -36,11 +36,13 @@
 		</Compiler>
 		<Unit filename="include/Client.hpp" />
 		<Unit filename="include/Communicator.hpp" />
+		<Unit filename="include/Logics.hpp" />
 		<Unit filename="include/Message.hpp" />
 		<Unit filename="include/Server.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Client.cpp" />
 		<Unit filename="src/Communicator.cpp" />
+		<Unit filename="src/Logics.cpp" />
 		<Unit filename="src/Message.cpp" />
 		<Unit filename="src/Server.cpp" />
 		<Extensions>
