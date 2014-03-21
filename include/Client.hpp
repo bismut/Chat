@@ -1,12 +1,16 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 
+#include "ClientCommunicator.hpp"
+#include "Logics.hpp"
 #include "Message.hpp"
 
+
+// Класс-клиент. Абстракция на уровне логики игры.
 class Client
 {
     public:
-        Client();
+        Client(Logics* logics, ClientCommunicator* communicator);
         virtual ~Client();
 
         Message ReceiveMessage();
@@ -17,7 +21,7 @@ class Client
 
     private:
         Logics* _logics;
-        Communicator* _communicator;
+        ClientCommunicator* _communicator;
 
 
 

@@ -5,9 +5,42 @@
 1394824001 d:\temp\œ—œ\chat\messagingserver\include\communicator.hpp
 	<winsock2.h>
 
-1394824308 source:d:\temp\œ—œ\chat\messagingserver\main.cpp
-	<stdio.h>
+1395433876 source:d:\temp\œ—œ\chat\messagingserver\main.cpp
+	"UserInterface.hpp"
+
+1395433618 d:\temp\œ—œ\chat\messagingserver\include\userinterface.hpp
+	<iostream>
+
+1395434007 source:d:\temp\œ—œ\chat\messagingserver\src\client.cpp
+	"Client.hpp"
+
+1395434005 d:\temp\œ—œ\chat\messagingserver\include\client.hpp
+	"ClientCommunicator.hpp"
+	"Logics.hpp"
+	"Message.hpp"
+
+1395431113 d:\temp\œ—œ\chat\messagingserver\include\clientcommunicator.hpp
 	<winsock2.h>
+
+1395433815 d:\temp\œ—œ\chat\messagingserver\include\logics.hpp
 	<windows.h>
-	"Communicator.hpp"
+
+1395010460 d:\temp\œ—œ\chat\messagingserver\include\message.hpp
+
+1395431372 source:d:\temp\œ—œ\chat\messagingserver\src\clientcommunicator.cpp
+	"ClientCommunicator.hpp"
+
+1395432443 source:d:\temp\œ—œ\chat\messagingserver\src\logics.cpp
+	"Logics.hpp"
+
+1395010461 source:d:\temp\œ—œ\chat\messagingserver\src\message.cpp
+	"Message.hpp"
+
+1395431676 source:d:\temp\œ—œ\chat\messagingserver\src\server.cpp
+	"Server.hpp"
+
+1395434068 d:\temp\œ—œ\chat\messagingserver\include\server.hpp
+	<vector>
+	"Message.hpp"
+	"Client.hpp"
 

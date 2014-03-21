@@ -2,10 +2,7 @@
 #define LOGICS_HPP
 
 #include <windows.h>
-#include <vector>
 
-#include "Message.hpp"
-#include "Communicator.hpp"
 
 class Logics
 {
@@ -13,16 +10,12 @@ class Logics
         Logics();
         virtual ~Logics();
 
-        void PutMessageFromClient(Message message);
-        void CreateNewClient(Communicator* communicator);
+
 
     protected:
 
     private:
-        vector<Client> _clients;
 
-        // клиенты сами добавляют сюда свои сообщения
-        vector<Message> _messagesFromClients;
 
 
 

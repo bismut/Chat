@@ -1,19 +1,19 @@
-#include "Communicator.hpp"
+#include "ClientCommunicator.hpp"
 //    ZeroMemory(_bufferRecieve, sizeof(_bufferRecieve));
 //    ZeroMemory(_bufferSend,    sizeof(_bufferSend));
 
 // Констуктор.
-Communicator::Communicator(SOCKET newSocket)
+ClientCommunicator::ClientCommunicator(SOCKET newSocket)
 {
     _socket = newSocket;
 }
 
-Communicator::~Communicator()
+ClientCommunicator::~ClientCommunicator()
 {
 
 }
 
-bool Communicator::SendBytes(char* bytes, int length)
+bool ClientCommunicator::SendBytes(char* bytes, int length)
 {
     send(_socket, (char*) &length, sizeof(length), 0);
     send(_socket, bytes, length, 0);
@@ -27,7 +27,7 @@ bool Communicator::SendBytes(char* bytes, int length)
 }
 
 /** В буфере должно быть достаточно места для входящих данных. */
-bool Communicator::ReceiveBytes(char* bytes)
+bool ClientCommunicator::ReceiveBytes(char* bytes)
 {
     int length;
     recv(_socket, (char*) &length, sizeof(length), 0);
@@ -37,8 +37,8 @@ bool Communicator::ReceiveBytes(char* bytes)
     return true;
 }
 
-// Отключается от сервера.
-void Communicator::Disconnect()
+// Отключить клиента.
+void ClientCommunicator::Disconnect()
 {
     closesocket(_socket);
     _socket = INVALID_SOCKET;

@@ -1,42 +1,32 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
-#include <winsock2.h>
-#include <windows.h>
+#include <vector>
 
-#include "Communicator.hpp"
-#include "Logics.hpp"
+#include "Message.hpp"
+#include "Client.hpp"
 
 using namespace std;
 
+//  ласс-сервер. јбстракци€ на уровне логики игры.
 class Server
 {
     public:
         Server();
         virtual ~Server();
 
-        bool InitializeWinsock2DLL();
-        bool Listen();
-        bool StopListen();
-        bool TerminateWinsock2DLL();
-
-        int GetPort();
-        void SetPort(int port);
+        void PutMessageFromClient(Message message);
+        //void CreateNewClient(Communicator* communicator);
 
     protected:
 
     private:
-        Logics* _logics;
 
-        static int _maxCountConnections;
+        vector<Client> _clients;
 
-        SOCKET _socketServer;
-        sockaddr_in _localAddr;
-        int _port;
+        // клиенты сами добавл€ют сюда свои сообщени€
+        vector<Message> _messagesFromClients;
 
-        HANDLE _hThreadAcceptConnections;
-        DWORD WINAPI threadAcceptConnections(LPVOID lParam);
-        HANDLE _hAutoEventStopAccepting;
 
 };
 
