@@ -1,6 +1,7 @@
 #define _WIN32_WINNT 0x501
 
-#include "UserInterface.hpp"
+//#include "Logics.hpp"
+//#include "UserInterface.hpp"
 
 //#include <stdio.h>
 //#include <winsock2.h>
@@ -136,7 +137,13 @@
 
 int main()
 {
-    UserInterface::Run();
+//    Logics* logics = new Logics();
+//
+//    UserInterface userInterface (logics);
+//    userInterface.Run();
+//
+//    delete logics;
+
     return 0;
 }
 

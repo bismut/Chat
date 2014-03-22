@@ -7,6 +7,8 @@ class Message
     public:
         Message();
         virtual ~Message();
+
+
     protected:
     private:
 };

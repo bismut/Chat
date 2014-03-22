@@ -3,20 +3,24 @@
 
 #include <iostream>
 
+#include "Logics.hpp"
+
 using namespace std;
 
 class UserInterface
 {
     public:
-        UserInterface();
+        UserInterface(Logics* logics);
         virtual ~UserInterface();
 
-        static void Run();
+        void Run();
 
     protected:
 
     private:
+        Logics* _logics;
 
+        int showMenu();
 
 };
 

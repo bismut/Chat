@@ -38,14 +38,15 @@
 		<Unit filename="include/ClientCommunicator.hpp" />
 		<Unit filename="include/Logics.hpp" />
 		<Unit filename="include/Message.hpp" />
+		<Unit filename="include/Program.hpp" />
 		<Unit filename="include/Server.hpp" />
 		<Unit filename="include/ServerCommunicator.hpp" />
 		<Unit filename="include/UserInterface.hpp" />
-		<Unit filename="main.cpp" />
 		<Unit filename="src/Client.cpp" />
 		<Unit filename="src/ClientCommunicator.cpp" />
 		<Unit filename="src/Logics.cpp" />
 		<Unit filename="src/Message.cpp" />
+		<Unit filename="src/Program.cpp" />
 		<Unit filename="src/Server.cpp" />
 		<Unit filename="src/ServerCommunicator.cpp" />
 		<Unit filename="src/UserInterface.cpp" />

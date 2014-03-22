@@ -2,14 +2,29 @@
 
 Logics::Logics()
 {
-    //ctor
+
+    _isGameStarted = false;
 }
+
+
 
 Logics::~Logics()
 {
-    //dtor
+
 }
 
 
 
+//bool Logics::GetServerStatus()
+//{
+//    // Not implemented.
+//    return false;
+//}
+//
+//
+//
+//bool Logics::GetGameStatus()
+//{
+//    return _isGameStarted;
+//}
 

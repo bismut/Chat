@@ -1,11 +1,17 @@
 #include "Server.hpp"
 
-Server::Server()
+Server::Server(Logics* logics)
 {
-    //ctor
+    _logics = logics;
+
 }
 
 Server::~Server()
 {
-    //dtor
+
+}
+
+void Server::CreateNewClient(ClientCommunicator* communicator)
+{
+
 }

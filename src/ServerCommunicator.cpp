@@ -81,7 +81,7 @@ bool ServerCommunicator::Listen()
     }
 
     // run thread for accepting connections:
-    _hThreadAcceptConnections = CreateThread(NULL, 0, threadAcceptConnections, NULL, 0, NULL);
+    _hThreadAcceptConnections = (HANDLE) _beginthreadex(NULL, 0, threadAcceptConnections, this, 0, NULL);
     if(_hThreadAcceptConnections == INVALID_HANDLE_VALUE)
     {
         printf("Error in function \"CrateThread\".\n");
@@ -95,21 +95,22 @@ bool ServerCommunicator::Listen()
 
 
 
-DWORD WINAPI ServerCommunicator::threadAcceptConnections(LPVOID lParam)
+unsigned __stdcall ServerCommunicator::threadAcceptConnections(void* objectServerCommunicator)
 {
+    ServerCommunicator* sc = (ServerCommunicator*) objectServerCommunicator;
     while(true)
     {
-        if(WaitForSingleObject(_hAutoEventStopAccepting, 0) == WAIT_OBJECT_0)
+        if(WaitForSingleObject(sc->_hAutoEventStopAccepting, 0) == WAIT_OBJECT_0)
             break;
 
         sockaddr_in clientAddr;
         int clientAddrSize = sizeof(clientAddr);
-        SOCKET clientSocket = accept(_socketServer, (sockaddr *) &clientAddr, &clientAddrSize);
+        SOCKET clientSocket = accept(sc->_socketServer, (sockaddr *) &clientAddr, &clientAddrSize);
 
         if(clientSocket != INVALID_SOCKET)
         {
-            Communicator* communicator = new Communicator(clientSocket);
-            _logics.AddCommunicatorFromServer(communicator);
+            ClientCommunicator* communicator = new ClientCommunicator(clientSocket);
+            sc->_server->CreateNewClient(communicator);
         }
     }
     return 0;

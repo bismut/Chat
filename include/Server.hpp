@@ -5,6 +5,8 @@
 
 #include "Message.hpp"
 #include "Client.hpp"
+#include "ClientCommunicator.hpp"
+#include "Logics.hpp"
 
 using namespace std;
 
@@ -12,17 +14,23 @@ using namespace std;
 class Server
 {
     public:
-        Server();
+        Server(Logics* logics);
         virtual ~Server();
 
-        void PutMessageFromClient(Message message);
-        //void CreateNewClient(Communicator* communicator);
+        //void PutMessageFromClient(Message message);
+        void CreateNewClient(ClientCommunicator* communicator);
 
     protected:
 
     private:
+        // ссылка ни логику игры
+        Logics* _logics;
 
+        // клиенты, которые участвуют в игре
         vector<Client> _clients;
+
+        // очередь ожидания клиентов для подключения к игре
+        vector<Client> _waitingClients;
 
         // клиенты сами добавляют сюда свои сообщения
         vector<Message> _messagesFromClients;

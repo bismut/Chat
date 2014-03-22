@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <winsock2.h>
 #include <windows.h>
+#include <process.h>
 
-#include <Server.hpp>
+#include "ClientCommunicator.hpp"
+#include "Server.hpp"
 
 
 // Низкоуровневый класс сервера для прослушивания сокета
@@ -25,7 +27,7 @@ class ServerCommunicator
         void SetPort(int port);
 
         HANDLE _hThreadAcceptConnections;
-        DWORD WINAPI threadAcceptConnections(LPVOID lParam);
+        static unsigned __stdcall threadAcceptConnections(void* objectServerCommunicator);
         HANDLE _hAutoEventStopAccepting;
 
     protected:

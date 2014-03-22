@@ -1,8 +1,7 @@
 #ifndef LOGICS_HPP
 #define LOGICS_HPP
 
-#include <windows.h>
-
+#include "Server.hpp"
 
 class Logics
 {
@@ -10,16 +9,18 @@ class Logics
         Logics();
         virtual ~Logics();
 
-
+//        bool GetServerStatus();
+//        bool GetGameStatus();
 
     protected:
 
     private:
 
+        bool _isGameStarted;
 
+        Server* _server;
 
-
-        DWORD WINAPI tick(LPVOID lParam);
+        //DWORD WINAPI tick(LPVOID lParam);
 
 };
 
