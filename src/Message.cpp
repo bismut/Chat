@@ -2,10 +2,17 @@
 
 Message::Message()
 {
-    //ctor
+
 }
 
 Message::~Message()
 {
-    //dtor
+
+}
+
+
+
+void Message::getInfo()
+{
+
 }

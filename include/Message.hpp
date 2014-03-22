@@ -8,9 +8,12 @@ class Message
         Message();
         virtual ~Message();
 
+        void getInfo();
 
     protected:
     private:
+        int _delInfo;
+
 };
 
 #endif // MESSAGE_HPP

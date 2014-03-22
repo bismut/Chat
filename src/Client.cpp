@@ -1,5 +1,8 @@
 #include "Client.hpp"
 
+#include "ClientCommunicator.hpp"
+#include "Logics.hpp"
+#include "Message.hpp"
 
 
 Client::Client(Logics* logics, ClientCommunicator* communicator)

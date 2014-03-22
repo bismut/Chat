@@ -1,7 +1,7 @@
 #ifndef LOGICS_HPP
 #define LOGICS_HPP
 
-#include "Server.hpp"
+class Server;
 
 class Logics
 {
@@ -9,8 +9,8 @@ class Logics
         Logics();
         virtual ~Logics();
 
-//        bool GetServerStatus();
-//        bool GetGameStatus();
+        bool GetServerStatus();
+        bool GetGameStatus();
 
     protected:
 

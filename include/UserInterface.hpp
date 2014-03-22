@@ -1,9 +1,10 @@
 #ifndef USERINTERFACE_HPP
 #define USERINTERFACE_HPP
 
+#include <cstdio>
 #include <iostream>
 
-#include "Logics.hpp"
+class Logics;
 
 using namespace std;
 

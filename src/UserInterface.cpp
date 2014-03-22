@@ -1,5 +1,9 @@
 #include "UserInterface.hpp"
 
+#include "Logics.hpp"
+
+
+
 UserInterface::UserInterface(Logics* logics)
 {
     _logics = logics;
@@ -24,8 +28,8 @@ void UserInterface::Run()
         cout << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
         cout << "Status:" << endl;
-        cout << "Server has been started: " << _logics->GetServerStatus();
-        cout << "Game has been started:   " << _logics->GetGameStatus();
+        cout << "Server has been started: " << _logics->GetServerStatus() << endl;
+        cout << "Game has been started:   " << _logics->GetGameStatus() << endl;
 
         cout << endl;
         cout << "You can:" << endl;
@@ -38,20 +42,24 @@ void UserInterface::Run()
         cout << "Input your choice: ";
 
         int menu;
-
         cin >> menu;
 
         switch(menu)
         {
         case 1:
+            break;
 
+        case 2:
+            break;
+
+        case 3:
             break;
 
         case 0:
             exit = true;
             cout << endl;
-            cout << "Press any key to exit . . . ";
-            cin;
+            cout << "Press 'Enter' to exit . . . ";
+            fflush(stdin); getchar();
             break;
 
         default:

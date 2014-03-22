@@ -1,4 +1,5 @@
 #include "Logics.hpp"
+#include "Server.hpp"
 
 Logics::Logics()
 {
@@ -15,16 +16,16 @@ Logics::~Logics()
 
 
 
-//bool Logics::GetServerStatus()
-//{
-//    // Not implemented.
-//    return false;
-//}
-//
-//
-//
-//bool Logics::GetGameStatus()
-//{
-//    return _isGameStarted;
-//}
+bool Logics::GetServerStatus()
+{
+    // Not implemented.
+    return false;
+}
+
+
+
+bool Logics::GetGameStatus()
+{
+    return _isGameStarted;
+}
 

@@ -3,10 +3,10 @@
 
 #include <vector>
 
-#include "Message.hpp"
-#include "Client.hpp"
-#include "ClientCommunicator.hpp"
-#include "Logics.hpp"
+class Message;
+class Client;
+class ClientCommunicator;
+class Logics;
 
 using namespace std;
 
@@ -16,6 +16,7 @@ class Server
     public:
         Server(Logics* logics);
         virtual ~Server();
+
 
         //void PutMessageFromClient(Message message);
         void CreateNewClient(ClientCommunicator* communicator);
@@ -27,14 +28,13 @@ class Server
         Logics* _logics;
 
         // клиенты, которые участвуют в игре
-        vector<Client> _clients;
+        vector<Client>* _clients;
 
         // очередь ожидания клиентов для подключения к игре
-        vector<Client> _waitingClients;
+        vector<Client>* _waitingClients;
 
         // клиенты сами добавляют сюда свои сообщения
-        vector<Message> _messagesFromClients;
-
+        vector<Message>* _messagesFromClients;
 
 };
 

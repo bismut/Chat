@@ -1,5 +1,20 @@
 #define _WIN32_WINNT 0x501
 
+#include "Logics.hpp"
+#include "UserInterface.hpp"
+
+int main()
+{
+    Logics* logics = new Logics();
+
+    UserInterface userInterface (logics);
+    userInterface.Run();
+
+    delete logics;
+
+    return 0;
+}
+
 //#include "Logics.hpp"
 //#include "UserInterface.hpp"
 
@@ -135,15 +150,5 @@
 //    return 0;
 //}
 
-int main()
-{
-//    Logics* logics = new Logics();
-//
-//    UserInterface userInterface (logics);
-//    userInterface.Run();
-//
-//    delete logics;
 
-    return 0;
-}
 

@@ -1,8 +1,9 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 
-#include "Logics.hpp"
-#include "ClientCommunicator.hpp"
+class ClientCommunicator;
+class Logics;
+class Message;
 
 
 // Класс-клиент. Абстракция на уровне логики игры.

@@ -1,5 +1,8 @@
 #include "Server.hpp"
 
+#include "ClientCommunicator.hpp"
+#include "Logics.hpp"
+
 Server::Server(Logics* logics)
 {
     _logics = logics;
